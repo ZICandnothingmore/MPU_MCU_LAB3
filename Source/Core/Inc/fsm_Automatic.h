@@ -10,5 +10,7 @@
 
 #include "main.h"
 
+void automatic_run();
+void automatic_init();
 
 #endif /* INC_AUTOMATIC_H_ */

@@ -22,7 +22,8 @@ Core/Src/fsm_Global.o: ../Core/Src/fsm_Global.c ../Core/Inc/fsm_Global.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
+ ../Core/Inc/software_timer.h ../Core/Inc/display7SEGLED.h
 
 ../Core/Inc/fsm_Global.h:
 
@@ -75,3 +76,7 @@ Core/Src/fsm_Global.o: ../Core/Src/fsm_Global.c ../Core/Inc/fsm_Global.h \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:
 
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
+
+../Core/Inc/software_timer.h:
+
+../Core/Inc/display7SEGLED.h:

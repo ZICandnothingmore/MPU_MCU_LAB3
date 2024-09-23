@@ -6,6 +6,8 @@
  */
 
 #include "fsm_Global.h"
+#include "software_timer.h"
+#include "display7SEGLED.h"
 
-int led_status = INIT;
+int status = INIT;
 

@@ -7,6 +7,8 @@
 
 #include "fsm_Manual.h"
 #include "fsm_Global.h"
+#include "software_timer.h"
+
 
 void manual_init(){
 

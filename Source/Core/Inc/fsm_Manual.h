@@ -10,5 +10,7 @@
 
 #include "main.h"
 
+void manual_run();
+void manual_init();
 
 #endif /* INC_MANUAL_H_ */

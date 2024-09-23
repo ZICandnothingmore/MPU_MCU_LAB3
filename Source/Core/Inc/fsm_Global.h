@@ -21,5 +21,5 @@
 #define MAN_RED_GREEN	14
 #define MAN_RED_AMBER	15
 
-extern int led_status;
+extern int status;
 #endif /* INC_GLOBAL_H_ */
