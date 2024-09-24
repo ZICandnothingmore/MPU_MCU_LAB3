@@ -9,6 +9,7 @@
 #define INC_DISPLAYTRAFFICLIGHT_H_
 
 #include "main.h"
+#include "display7SEGLED.h"
 
 void traffic_light_1_run();
 void traffic_light_2_run();

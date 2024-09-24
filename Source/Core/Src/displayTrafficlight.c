@@ -6,7 +6,6 @@
  */
 
 #include "displayTrafficLight.h"
-#include "display7SEGLED.h"
 
 int traffic_light_signal_1 = 0;
 int traffic_light_signal_2 = 0;

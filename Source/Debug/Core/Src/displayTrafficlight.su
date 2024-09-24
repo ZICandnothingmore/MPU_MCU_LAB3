@@ -1,2 +1,2 @@
-displayTrafficlight.c:16:6:traffic_light_1_run	8	static
-displayTrafficlight.c:58:6:traffic_light_2_run	8	static
+displayTrafficlight.c:15:6:traffic_light_1_run	8	static
+displayTrafficlight.c:57:6:traffic_light_2_run	8	static
