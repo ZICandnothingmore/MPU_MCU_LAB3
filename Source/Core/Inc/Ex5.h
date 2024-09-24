@@ -11,6 +11,7 @@
 #include "main.h"
 #include "displayTrafficLight.h"
 
+void haizz();
 void ex5_init();
 void ex5_run();
 

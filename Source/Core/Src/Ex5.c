@@ -155,9 +155,13 @@ void ex5_init(){
 	display7SEG_2(index_mode);
 }
 
-void ex5_run(){
+void haizz(){
 	display7SEG_1(index_trafficlight);
 	index_trafficlight++;
+	if (index_trafficlight > 1) index_trafficlight = 0;
+}
+
+void ex5_run(){
 	display7SEG_2(index_mode++);
 	if (index_mode > 1) index_mode = 0;
 }

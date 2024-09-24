@@ -27,6 +27,7 @@
 //#include "fsm_Manual.h"
 #include "software_timer.h"
 #include "input_processing.h"
+#include "Ex5.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -94,6 +95,8 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   ex5_init();
+  setTimer(0,1000);
+  setTimer(1,500);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -106,7 +109,14 @@ int main(void)
 //	 automatic_run();
 //	 manual_run();
 	fsm_for_input_processing();
-	ex5_run();
+
+	if (isTimerExpired(0)){
+		ex5_run();
+	}
+	if (isTimerExpired(1)){
+		HAL_GPIO_TogglePin(RED_LED_Init_GPIO_Port, RED_LED_Init_Pin);
+		haizz();
+	}
   }
   /* USER CODE END 3 */
 }
