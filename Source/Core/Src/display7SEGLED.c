@@ -192,3 +192,5 @@ void display7SEG_2(int num){
 		HAL_GPIO_WritePin(gg_GPIO_Port, gg_Pin, 0);
 	}
 }
+
+
