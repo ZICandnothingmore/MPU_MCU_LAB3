@@ -6,6 +6,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Core/Src/Ex5.c \
+../Core/Src/button.c \
 ../Core/Src/display7SEGLED.c \
 ../Core/Src/displayTrafficlight.c \
 ../Core/Src/fsm_Automatic.c \
@@ -24,6 +25,7 @@ C_SRCS += \
 
 OBJS += \
 ./Core/Src/Ex5.o \
+./Core/Src/button.o \
 ./Core/Src/display7SEGLED.o \
 ./Core/Src/displayTrafficlight.o \
 ./Core/Src/fsm_Automatic.o \
@@ -42,6 +44,7 @@ OBJS += \
 
 C_DEPS += \
 ./Core/Src/Ex5.d \
+./Core/Src/button.d \
 ./Core/Src/display7SEGLED.d \
 ./Core/Src/displayTrafficlight.d \
 ./Core/Src/fsm_Automatic.d \

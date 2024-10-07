@@ -10,6 +10,7 @@
 
 #include "main.h"
 #include "displayTrafficLight.h"
+#include "display7SEGLED.h"
 
 void haizz();
 void ex5_init();

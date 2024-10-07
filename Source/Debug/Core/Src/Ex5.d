@@ -23,7 +23,7 @@ Core/Src/Ex5.o: ../Core/Src/Ex5.c ../Core/Inc/Ex5.h ../Core/Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
- ../Core/Inc/displayTrafficLight.h
+ ../Core/Inc/displayTrafficLight.h ../Core/Inc/display7SEGLED.h
 
 ../Core/Inc/Ex5.h:
 
@@ -78,3 +78,5 @@ Core/Src/Ex5.o: ../Core/Src/Ex5.c ../Core/Inc/Ex5.h ../Core/Inc/main.h \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
 
 ../Core/Inc/displayTrafficLight.h:
+
+../Core/Inc/display7SEGLED.h:

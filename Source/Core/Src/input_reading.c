@@ -21,8 +21,16 @@ static GPIO_PinState debounceButtonBuffer2[NBS_OF_BUTTONS];
 static uint8_t flagForButtonPressed1s[NBS_OF_BUTTONS];
 //to define counter for automatically increasing the value after the button is pressed more than 1 sec
 static uint16_t counterForButtonPress1s[NBS_OF_BUTTONS];
+static unsigned char last_button;
+unsigned char raw_button;
+unsigned char filtered_button;
 
 void button_reading(void){
+	last_button = raw_button;
+	raw_button = HAL_GPIO_ReadPin(BUTTON_1_GPIO_Port, BUTTON_1_Pin);
+	if (last_button == raw_button){
+		filtered_button = raw_button;
+	}
 	for (char i = 0; i < NBS_OF_BUTTONS; i++){
 		debounceButtonBuffer2[i] = debounceButtonBuffer2[i];
 		debounceButtonBuffer1[i] = HAL_GPIO_ReadPin(BUTTON_1_GPIO_Port, BUTTON_1_Pin);

@@ -1,21 +1,21 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2024 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file           : main.c
+ * @brief          : Main program body
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2024 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under BSD 3-Clause license,
+ * the "License"; You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at:
+ *                        opensource.org/licenses/BSD-3-Clause
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -28,6 +28,7 @@
 #include "software_timer.h"
 #include "input_processing.h"
 #include "Ex5.h"
+#include "button.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -94,30 +95,40 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  ex5_init();
-  setTimer(0,1000);
-  setTimer(1,500);
+	HAL_TIM_Base_Start_IT(&htim2);
+	HAL_GPIO_WritePin(GPIOB,
+			a_Pin |b_Pin | c_Pin | dd_Pin | ee_Pin | ff_Pin | gg_Pin | d_Pin | e_Pin
+					| f_Pin | g_Pin | aa_Pin | bb_Pin | cc_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA,
+			 EN0_Pin | EN1_Pin
+					| EN2_Pin | EN3_Pin, GPIO_PIN_SET);
+	//ex5_init();
+	setTimer(0, 1000);
+	setTimer(1, 500);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
+	while (1) {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
 //	 automatic_run();
 //	 manual_run();
-	fsm_for_input_processing();
+		//fsm_for_input_processing();
 
-	if (isTimerExpired(0)){
-		ex5_run();
+		if (isTimerExpired(0)) {
+			setTimer(0, 1000);
+			ex5_run();
+		}
+		if (isTimerExpired(1)) {
+			setTimer(1, 500);
+			HAL_GPIO_TogglePin(RED_LED_Init_GPIO_Port, RED_LED_Init_Pin);
+			//haizz();
+		}
+		//getKeyInput();
+
 	}
-	if (isTimerExpired(1)){
-		HAL_GPIO_TogglePin(RED_LED_Init_GPIO_Port, RED_LED_Init_Pin);
-		haizz();
-	}
-  }
   /* USER CODE END 3 */
 }
 
@@ -220,36 +231,37 @@ static void MX_GPIO_Init(void)
                           |EN1_Pin|EN2_Pin|EN3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, b_Pin|c_Pin|dd_Pin|ee_Pin
-                          |ff_Pin|gg_Pin|d_Pin|e_Pin
-                          |f_Pin|g_Pin|aa_Pin|bb_Pin
-                          |cc_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, a_Pin|b_Pin|c_Pin|dd_Pin
+                          |ee_Pin|ff_Pin|gg_Pin|d_Pin
+                          |e_Pin|f_Pin|g_Pin|aa_Pin
+                          |bb_Pin|cc_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : RED_LED_Init_Pin RED_1_Pin YELLOW_1_Pin GREEN_1_Pin
-                           RED_2_Pin YELLOW_2_Pin GREEN_2_Pin EN0_Pin
-                           EN1_Pin EN2_Pin EN3_Pin */
-  GPIO_InitStruct.Pin = RED_LED_Init_Pin|RED_1_Pin|YELLOW_1_Pin|GREEN_1_Pin
-                          |RED_2_Pin|YELLOW_2_Pin|GREEN_2_Pin|EN0_Pin
-                          |EN1_Pin|EN2_Pin|EN3_Pin;
+  /*Configure GPIO pin : RED_LED_Init_Pin */
+  GPIO_InitStruct.Pin = RED_LED_Init_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(RED_LED_Init_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : RED_1_Pin YELLOW_1_Pin GREEN_1_Pin RED_2_Pin
+                           YELLOW_2_Pin GREEN_2_Pin EN0_Pin EN1_Pin
+                           EN2_Pin EN3_Pin */
+  GPIO_InitStruct.Pin = RED_1_Pin|YELLOW_1_Pin|GREEN_1_Pin|RED_2_Pin
+                          |YELLOW_2_Pin|GREEN_2_Pin|EN0_Pin|EN1_Pin
+                          |EN2_Pin|EN3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : a_Pin */
-  GPIO_InitStruct.Pin = a_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(a_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : b_Pin c_Pin dd_Pin ee_Pin
-                           ff_Pin gg_Pin d_Pin e_Pin
-                           f_Pin g_Pin aa_Pin bb_Pin
-                           cc_Pin */
-  GPIO_InitStruct.Pin = b_Pin|c_Pin|dd_Pin|ee_Pin
-                          |ff_Pin|gg_Pin|d_Pin|e_Pin
-                          |f_Pin|g_Pin|aa_Pin|bb_Pin
-                          |cc_Pin;
+  /*Configure GPIO pins : a_Pin b_Pin c_Pin dd_Pin
+                           ee_Pin ff_Pin gg_Pin d_Pin
+                           e_Pin f_Pin g_Pin aa_Pin
+                           bb_Pin cc_Pin */
+  GPIO_InitStruct.Pin = a_Pin|b_Pin|c_Pin|dd_Pin
+                          |ee_Pin|ff_Pin|gg_Pin|d_Pin
+                          |e_Pin|f_Pin|g_Pin|aa_Pin
+                          |bb_Pin|cc_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -270,7 +282,9 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+	timer_run();
+}
 /* USER CODE END 4 */
 
 /**
@@ -280,11 +294,10 @@ static void MX_GPIO_Init(void)
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
-  __disable_irq();
-  while (1)
-  {
-  }
+	/* User can add his own implementation to report the HAL error return state */
+	__disable_irq();
+	while (1) {
+	}
   /* USER CODE END Error_Handler_Debug */
 }
 
