@@ -11,7 +11,9 @@
 #include "main.h"
 #include "display7SEGLED.h"
 
-void traffic_light_run();
+extern int counter, LED_1, LED_2;
+
+void display_LED();
 void button_mode();
 
 #endif /* INC_DISPLAYTRAFFICLIGHT_H_ */

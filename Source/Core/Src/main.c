@@ -27,7 +27,6 @@
 //#include "fsm_Manual.h"
 #include "software_timer.h"
 #include "input_processing.h"
-#include "Ex5.h"
 #include "button.h"
 #include "Global.h"
 /* USER CODE END Includes */
@@ -106,7 +105,6 @@ int main(void)
 	//ex5_init();
 	setTimer(0, 1000);
 	setTimer(1, 500);
-	status = INIT;
   /* USER CODE END 2 */
 
   /* Infinite loop */
