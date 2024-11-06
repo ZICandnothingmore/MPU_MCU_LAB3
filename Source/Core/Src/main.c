@@ -29,6 +29,7 @@
 #include "input_processing.h"
 #include "Ex5.h"
 #include "button.h"
+#include "Global.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -105,6 +106,7 @@ int main(void)
 	//ex5_init();
 	setTimer(0, 1000);
 	setTimer(1, 500);
+	status = INIT;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -119,14 +121,20 @@ int main(void)
 
 		if (isTimerExpired(0)) {
 			setTimer(0, 1000);
-			ex5_run();
+			automatic_run();
 		}
-		if (isTimerExpired(1)) {
-			setTimer(1, 500);
+
+//		if (isTimerExpired(1)) {
+//			setTimer(1, 500);
+//			HAL_GPIO_TogglePin(RED_LED_Init_GPIO_Port, RED_LED_Init_Pin);
+//			//haizz();
+//		}
+//		if (HAL_GPIO_ReadPin(GPIOA, BUTTON_1_Pin) == GPIO_PIN_RESET) //pullup: pressed = 0
+//			HAL_GPIO_TogglePin(RED_LED_Init_GPIO_Port, RED_LED_Init_Pin);
+		if (isButtonPressed(0) == 1){
 			HAL_GPIO_TogglePin(RED_LED_Init_GPIO_Port, RED_LED_Init_Pin);
-			//haizz();
 		}
-		//getKeyInput();
+		//automatic_run();
 
 	}
   /* USER CODE END 3 */
@@ -284,6 +292,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	timer_run();
+	getInputKey();
 }
 /* USER CODE END 4 */
 
