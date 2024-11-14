@@ -2,4 +2,4 @@ button.c:15:6:get_input_data	24	static
 button.c:26:10:get_Button_flag	16	static
 button.c:30:10:isButtonPressed	16	static
 button.c:38:5:isButtonLongPressed	16	static
-button.c:52:6:getInputKey	16	static
+button.c:86:6:getInputKey	16	static

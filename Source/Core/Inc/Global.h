@@ -17,10 +17,6 @@
 #include "displayTrafficLight.h"
 
 #define INIT 		1
-//#define GREEN_RED	2
-//#define YELLOW_RED	3
-//#define RED_GREEN	4
-//#define RED_YELLOW	5
 
 #define AUTO_RED_1		2
 #define AUTO_RED_2		3
@@ -32,10 +28,13 @@
 #define LED_ON		0
 #define LED_OFF		1
 
-#define MAN_GREEN_RED	12
-#define MAN_YELLOW_RED	13
-#define MAN_RED_GREEN	14
-#define MAN_RED_YELLOW	15
+#define MAN_RED		12
+#define MAN_GREEN	13
+#define MAN_RYELLOW	14
+
+#define RED			15
+#define YELLOW		16
+#define GREEN		17
 
 #define MODE1			22
 #define MODE2			23
@@ -46,7 +45,7 @@
 
 #define ALL_LED (RED_1_Pin | GREEN_1_Pin | YELLOW_1_Pin | RED_2_Pin | GREEN_2_Pin | YELLOW_2_Pin)
 
-extern int status;
+extern int status_led;
 extern int counter;
 extern int index_led;
 extern int buffer_7seg[MAX_7SEG];
@@ -65,5 +64,7 @@ extern int value;
 
 extern int STATUS_MODE;
 extern int STATUS_BLINKY;
+
+extern int modeLED;
 
 #endif /* INC_GLOBAL_H_ */

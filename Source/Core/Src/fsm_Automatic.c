@@ -16,11 +16,11 @@ void fsm_automatic_init() {
 			ALL_LED, LED_OFF);
 
 	STATUS_MODE = MODE1;
-	STATUS_7SEG = LED7SEG1;
+//	STATUS_7SEG = LED7SEG1;
 
-	setTimer(0, 1010); 	//for LED
+	setTimer(0, 1010); 	//for LED_1
 	setTimer(1, 230);	//for 4_7SEG
-	setTimer(2, 1010);
+	setTimer(2, 1010);	//for LED_2
 }
 
 void fsm_automatic_run() {

@@ -63,7 +63,15 @@ static void MX_TIM2_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+//void test_module_MANRED(){
+//	if (isButtonPressed(0)) {
+//		HAL_GPIO_WritePin(GPIOA, GREEN_1_Pin, LED_ON);
+//	}
+//	else if (isButtonPressed(2)) {
+//		TimeRed = value;
+//	}
+//	else manual_run(MODE2);
+//}
 /* USER CODE END 0 */
 
 /**
@@ -103,13 +111,12 @@ int main(void)
 	HAL_GPIO_WritePin(GPIOA,
 			 EN0_Pin | EN1_Pin
 					| EN2_Pin | EN3_Pin, GPIO_PIN_SET);
-	//ex5_init();
-//	setTimer(0, 1000); //for LED
-//	setTimer(1, 500);
-//	setTimer(2, 250); //for 7SEG
+//	setTimer(5, 1000); //for test module
 	fsm_automatic_init();
-//	setTimer(0, 1010); 	//for LED
-//	setTimer(1, 499);	//for 7SEG
+//	fsm_manual_init();
+//	setTimer(3, 523); 			//blinking led
+//	setTimer(4, 237);			//modified time
+//	HAL_GPIO_WritePin(GPIOA, ALL_LED, LED_OFF);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -118,22 +125,29 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-//	 automatic_run();
-//	 manual_run();
-		//fsm_for_input_processing();
-
-//		automatic_run();
-
-//		}
 //		if (HAL_GPIO_ReadPin(GPIOA, BUTTON_1_Pin) == GPIO_PIN_RESET) //pullup: pressed = 0
 //			HAL_GPIO_TogglePin(RED_LED_Init_GPIO_Port, RED_LED_Init_Pin);
 //		if (isButtonPressed(0) == 1){
 //			HAL_GPIO_TogglePin(RED_LED_Init_GPIO_Port, RED_LED_Init_Pin);
 //		}
-		//automatic_run();
+//		if (isButtonPressed(1) == 1){
+//			HAL_GPIO_TogglePin(GPIOA, RED_1_Pin);
+//		}
+//		if (isButtonPressed(2) == 1){
+//			HAL_GPIO_TogglePin(GPIOA, RED_2_Pin);
+//		}
 
 		fsm_setting_run();
 		fsm_automatic_run();
+
+		fsm_manual_run();
+
+//		if (isTimerExpired(5)){
+//			HAL_GPIO_TogglePin(GPIOA, RED_1_Pin);
+//			setTimer(5, 1000);
+//		}
+//		test_module_MANRED();
+
 	}
   /* USER CODE END 3 */
 }
@@ -273,16 +287,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : BUTTON_1_Pin */
-  GPIO_InitStruct.Pin = BUTTON_1_Pin;
+  /*Configure GPIO pins : BUTTON_1_Pin BUTTON_2_Pin BUTTON_3_Pin */
+  GPIO_InitStruct.Pin = BUTTON_1_Pin|BUTTON_2_Pin|BUTTON_3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(BUTTON_1_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : BUTTON_2_Pin BUTTON_3_Pin */
-  GPIO_InitStruct.Pin = BUTTON_2_Pin|BUTTON_3_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 }

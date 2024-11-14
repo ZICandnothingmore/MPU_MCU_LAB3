@@ -9,8 +9,10 @@
 #define INC_MANUAL_H_
 
 #include "main.h"
+#include "Global.h"
 
-void manual_run();
-void manual_init();
+void fsm_manual_run();
+void fsm_manual_init();
+void LED_Blinking(int modeLED);
 
 #endif /* INC_MANUAL_H_ */

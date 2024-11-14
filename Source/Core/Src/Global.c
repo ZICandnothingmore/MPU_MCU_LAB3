@@ -22,6 +22,7 @@ int TimeYellow = 2;
 int TimeForLed1 = 5;
 int TimeForLed2 = 3;
 int counter = 0;
-int status = 0;
+int status_led = 0;
+int modeLED = INIT;
 
 int value = 0;
