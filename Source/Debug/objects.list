@@ -4,6 +4,7 @@
 "./Core/Src/displayTrafficlight.o"
 "./Core/Src/fsm_Automatic.o"
 "./Core/Src/fsm_Manual.o"
+"./Core/Src/fsm_setting.o"
 "./Core/Src/input_processing.o"
 "./Core/Src/input_reading.o"
 "./Core/Src/main.o"

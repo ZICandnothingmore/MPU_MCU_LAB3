@@ -9,8 +9,10 @@
 #define INC_AUTOMATIC_H_
 
 #include "main.h"
+#include "Global.h"
 
-void automatic_run();
-void automatic_init();
+void display_4SEG7();
+void fsm_automatic_run();
+void fsm_automatic_init();
 
 #endif /* INC_AUTOMATIC_H_ */

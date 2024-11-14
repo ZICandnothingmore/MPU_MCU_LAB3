@@ -26,9 +26,10 @@
 //#include "fsm_Global.h"
 //#include "fsm_Manual.h"
 #include "software_timer.h"
-#include "input_processing.h"
+//#include "input_processing.h"
 #include "button.h"
 #include "Global.h"
+//#include "fsm_setting.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -103,8 +104,12 @@ int main(void)
 			 EN0_Pin | EN1_Pin
 					| EN2_Pin | EN3_Pin, GPIO_PIN_SET);
 	//ex5_init();
-	setTimer(0, 1000);
-	setTimer(1, 500);
+//	setTimer(0, 1000); //for LED
+//	setTimer(1, 500);
+//	setTimer(2, 250); //for 7SEG
+	fsm_automatic_init();
+//	setTimer(0, 1010); 	//for LED
+//	setTimer(1, 499);	//for 7SEG
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -117,23 +122,18 @@ int main(void)
 //	 manual_run();
 		//fsm_for_input_processing();
 
-		if (isTimerExpired(0)) {
-			setTimer(0, 1000);
-			automatic_run();
-		}
+//		automatic_run();
 
-//		if (isTimerExpired(1)) {
-//			setTimer(1, 500);
-//			HAL_GPIO_TogglePin(RED_LED_Init_GPIO_Port, RED_LED_Init_Pin);
-//			//haizz();
 //		}
 //		if (HAL_GPIO_ReadPin(GPIOA, BUTTON_1_Pin) == GPIO_PIN_RESET) //pullup: pressed = 0
 //			HAL_GPIO_TogglePin(RED_LED_Init_GPIO_Port, RED_LED_Init_Pin);
-		if (isButtonPressed(0) == 1){
-			HAL_GPIO_TogglePin(RED_LED_Init_GPIO_Port, RED_LED_Init_Pin);
-		}
+//		if (isButtonPressed(0) == 1){
+//			HAL_GPIO_TogglePin(RED_LED_Init_GPIO_Port, RED_LED_Init_Pin);
+//		}
 		//automatic_run();
 
+		fsm_setting_run();
+		fsm_automatic_run();
 	}
   /* USER CODE END 3 */
 }

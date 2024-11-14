@@ -11,6 +11,7 @@ C_SRCS += \
 ../Core/Src/displayTrafficlight.c \
 ../Core/Src/fsm_Automatic.c \
 ../Core/Src/fsm_Manual.c \
+../Core/Src/fsm_setting.c \
 ../Core/Src/input_processing.c \
 ../Core/Src/input_reading.c \
 ../Core/Src/main.c \
@@ -29,6 +30,7 @@ OBJS += \
 ./Core/Src/displayTrafficlight.o \
 ./Core/Src/fsm_Automatic.o \
 ./Core/Src/fsm_Manual.o \
+./Core/Src/fsm_setting.o \
 ./Core/Src/input_processing.o \
 ./Core/Src/input_reading.o \
 ./Core/Src/main.o \
@@ -47,6 +49,7 @@ C_DEPS += \
 ./Core/Src/displayTrafficlight.d \
 ./Core/Src/fsm_Automatic.d \
 ./Core/Src/fsm_Manual.d \
+./Core/Src/fsm_setting.d \
 ./Core/Src/input_processing.d \
 ./Core/Src/input_reading.d \
 ./Core/Src/main.d \

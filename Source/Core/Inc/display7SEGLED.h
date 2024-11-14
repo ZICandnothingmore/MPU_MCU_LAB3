@@ -9,6 +9,7 @@
 #define INC_DISPLAY7SEGLED_H_
 
 #include "main.h"
+#include "Global.h"
 
 #define NUM_0   (a_Pin | b_Pin | c_Pin | d_Pin | e_Pin | f_Pin)
 #define NUM_1   (b_Pin | c_Pin)
@@ -23,7 +24,15 @@
 #define ALL_SEG (a_Pin | b_Pin | c_Pin | d_Pin | e_Pin | f_Pin | g_Pin)
 #define TIMER_CYCLE 10
 
-void display7SEG_1(int num);
-void display7SEG_2(int num);
+#define LED7SEG1	30
+#define LED7SEG2	31
+#define LED7SEG3	32
+#define LED7SEG4	33
+
+void display7SEG(int num);
+void update7SEG (int index);
+
+void updateBuffer(int mode);
+void display_4_7SEG();
 
 #endif /* INC_DISPLAY7SEGLED_H_ */

@@ -16,7 +16,7 @@
 extern int button1_flag;
 
 void getInputKey();
-void setButton(int index, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+void get_input_data(int index, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
 uint16_t get_Button_flag(int index);
 uint16_t isButtonPressed(int index);
 int isButtonLongPressed(int index);

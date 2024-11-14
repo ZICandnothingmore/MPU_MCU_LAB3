@@ -1,2 +1,4 @@
-display7SEGLED.c:10:6:display7SEG_1	16	static
-display7SEGLED.c:138:6:display7SEG_2	16	static
+display7SEGLED.c:10:6:display7SEG	16	static
+display7SEGLED.c:138:6:update7SEG	16	static
+display7SEGLED.c:173:6:updateBuffer	16	static
+display7SEGLED.c:205:6:display_4_7SEG	8	static

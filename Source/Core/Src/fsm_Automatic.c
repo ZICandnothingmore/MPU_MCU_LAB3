@@ -5,73 +5,148 @@
  *      Author: ACER
  */
 
-#include <Global.h>
 #include "fsm_Automatic.h"
-#include "software_timer.h"
 
-//int counter = 0;
-//int LED_1 = 5;
-//int LED_2 = 3;
+int index_led = -1;		// 7seg lỡ 1 nhịp, trông khớp với đèn giao thông hơn
+int STATUS_LED_1 = INIT;
+int STATUS_LED_2 = INIT;
 
-void automatic_init() {
+void fsm_automatic_init() {
+	HAL_GPIO_WritePin(GPIOA,
+			RED_LED_Init_Pin | RED_1_Pin | YELLOW_1_Pin | GREEN_1_Pin
+					| RED_2_Pin | YELLOW_2_Pin | GREEN_2_Pin, LED_OFF);
 
+	STATUS_MODE = MODE1;
+	STATUS_7SEG = LED7SEG1;
+
+	setTimer(0, 1010); 	//for LED
+	setTimer(1, 230);	//for 4_7SEG
+	setTimer(2, 1010);
 }
 
-void automatic_run() {
-//	HAL_GPIO_WritePin(GPIOA,
-//			RED_LED_Init_Pin | RED_1_Pin | YELLOW_1_Pin | GREEN_1_Pin
-//					| RED_2_Pin | YELLOW_2_Pin | GREEN_2_Pin, GPIO_PIN_RESET);
-//	switch (status) {
-//	case INIT:
-//		//set up environment for next status
-//		HAL_GPIO_WritePin(GREEN_1_GPIO_Port, GREEN_1_Pin, 1);
-//		HAL_GPIO_WritePin(RED_2_GPIO_Port, RED_2_Pin, 1);
-//		status = GREEN_RED;
-//		break;
-//	case GREEN_RED:
-//		HAL_GPIO_WritePin(GREEN_1_GPIO_Port, GREEN_1_Pin, 1);
-//		HAL_GPIO_WritePin(RED_2_GPIO_Port, RED_2_Pin, 1);
-//		if (counter <= 0) {
-//			counter = 2;
-//			LED_1 = 2;
-//			status = YELLOW_RED;
-//		}
-//		break;
-//	case YELLOW_RED:
-//		HAL_GPIO_WritePin(YELLOW_1_GPIO_Port, YELLOW_1_Pin, 1);
-//		HAL_GPIO_WritePin(RED_2_GPIO_Port, RED_2_Pin, 1);
-//		if (counter <= 0) {
-//			counter = 3;
-//			LED_1 = 5;
-//			LED_2 = 3;
-//			status = RED_GREEN;
-//		}
-//		break;
-//	case RED_GREEN:
-//		HAL_GPIO_WritePin(RED_1_GPIO_Port, RED_1_Pin, 1);
-//		HAL_GPIO_WritePin(GREEN_2_GPIO_Port, GREEN_2_Pin, 1);
-//		if (counter <= 0) {
-//			counter = 2;
-//			LED_2 = 2;
-//			status = RED_YELLOW;
-//		}
-//		break;
-//	case RED_YELLOW:
-//		HAL_GPIO_WritePin(RED_1_GPIO_Port, RED_1_Pin, 1);
-//		HAL_GPIO_WritePin(YELLOW_2_GPIO_Port, YELLOW_2_Pin, 1);
-//		if (counter <= 0) {
-//			counter = 3;
-//			LED_1 = 3;
-//			LED_2 = 5;
-//			status = GREEN_RED;
-//			//}
-//		}
-//		break;
-//	default:
-//		break;
-//	}
-//	counter--;
-//	LED_1--;
-//	LED_2--;
-	 display_LED();
+void fsm_automatic_run() {
+	if (STATUS_MODE != MODE1)
+		return;
+
+	//default
+	if (TimeRed != TimeYellow + TimeGreen) {
+		TimeRed = 5;
+		TimeYellow = 2;
+		TimeGreen = 3;
+	}
+
+	switch (STATUS_LED_1) {
+	//RED LED FIRST
+	case INIT:
+		//initial
+		STATUS_LED_1 = AUTO_RED_1;
+		TimeForLed1 = TimeRed;
+		break;
+	case AUTO_RED_1:
+		//TODO
+		HAL_GPIO_WritePin(GPIOA, YELLOW_1_Pin | GREEN_1_Pin, LED_OFF);
+		HAL_GPIO_WritePin(GPIOA, RED_1_Pin, LED_ON);
+		//LED
+		if (isTimerExpired(0)) {
+			setTimer(0, 1000);
+			TimeForLed1--;
+			if (TimeForLed1 <= 0) {
+				STATUS_LED_1 = AUTO_GREEN_1;
+				TimeForLed1 = TimeGreen;
+			}
+		}
+		break;
+	case AUTO_GREEN_1:
+		//TODO
+		HAL_GPIO_WritePin(GPIOA, YELLOW_1_Pin | RED_1_Pin, LED_OFF);
+		HAL_GPIO_WritePin(GPIOA, GREEN_1_Pin, LED_ON);
+		//LED
+		if (isTimerExpired(0)) {
+			setTimer(0, 1000);
+			TimeForLed1--;
+			if (TimeForLed1 <= 0) {
+				STATUS_LED_1 = AUTO_YELLOW_1;
+				TimeForLed1 = TimeYellow;
+			}
+		}
+		break;
+	case AUTO_YELLOW_1:
+		//TODO
+		HAL_GPIO_WritePin(GPIOA, GREEN_1_Pin | RED_1_Pin, LED_OFF);
+		HAL_GPIO_WritePin(GPIOA, YELLOW_1_Pin, LED_ON);
+		//LED
+		if (isTimerExpired(0)) {
+			setTimer(0, 1000);
+			TimeForLed1--;
+			if (TimeForLed1 <= 0) {
+				STATUS_LED_1 = AUTO_RED_1;
+				TimeForLed1 = TimeRed;
+			}
+		}
+		break;
+	default:
+		break;
+	}
+
+	switch (STATUS_LED_2) {
+	//GREEN LED FIRST
+	case INIT:
+		//initial
+		STATUS_LED_2 = AUTO_GREEN_2;
+		TimeForLed2 = TimeGreen;
+		break;
+	case AUTO_RED_2:
+		//TODO
+		HAL_GPIO_WritePin(GPIOA, YELLOW_2_Pin | GREEN_2_Pin, LED_OFF);
+		HAL_GPIO_WritePin(GPIOA, RED_2_Pin, LED_ON);
+		//LED
+		if (isTimerExpired(2)) {
+			setTimer(2, 1000);
+			TimeForLed2--;
+			if (TimeForLed2 <= 0) {
+				STATUS_LED_2 = AUTO_GREEN_2;
+				TimeForLed2 = TimeGreen;
+			}
+		}
+		break;
+	case AUTO_GREEN_2:
+		//TODO
+		HAL_GPIO_WritePin(GPIOA, YELLOW_2_Pin | RED_2_Pin, LED_OFF);
+		HAL_GPIO_WritePin(GPIOA, GREEN_2_Pin, LED_ON);
+		//LED
+		if (isTimerExpired(2)) {
+			setTimer(2, 1000);
+			TimeForLed2--;
+			if (TimeForLed2 <= 0) {
+				STATUS_LED_2 = AUTO_YELLOW_2;
+				TimeForLed2 = TimeYellow;
+			}
+		}
+		break;
+	case AUTO_YELLOW_2:
+		//TODO
+		HAL_GPIO_WritePin(GPIOA, GREEN_2_Pin | RED_2_Pin, LED_OFF);
+		HAL_GPIO_WritePin(GPIOA, YELLOW_2_Pin, LED_ON);
+		//LED
+		if (isTimerExpired(2)) {
+			setTimer(2, 1000);
+			TimeForLed2--;
+			if (TimeForLed2 <= 0) {
+				STATUS_LED_2 = AUTO_RED_2;
+				TimeForLed2 = TimeRed;
+			}
+		}
+		break;
+	default:
+		break;
+	}
+
+	//7-SEG LED
+	updateBuffer(MODE1);
+	if (index_led > 3)
+		index_led = 0;
+	if (isTimerExpired(1)) {
+		setTimer(1, 250);
+		update7SEG(index_led++);
+	}
 }

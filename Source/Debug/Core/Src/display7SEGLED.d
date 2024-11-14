@@ -23,7 +23,11 @@ Core/Src/display7SEGLED.o: ../Core/Src/display7SEGLED.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
+ ../Core/Inc/Global.h ../Core/Inc/button.h ../Core/Inc/fsm_Automatic.h \
+ ../Core/Inc/fsm_Manual.h ../Core/Inc/software_timer.h \
+ ../Core/Inc/fsm_setting.h ../Core/Inc/displayTrafficLight.h \
+ ../Core/Inc/display7SEGLED.h
 
 ../Core/Inc/display7SEGLED.h:
 
@@ -76,3 +80,19 @@ Core/Src/display7SEGLED.o: ../Core/Src/display7SEGLED.c \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:
 
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
+
+../Core/Inc/Global.h:
+
+../Core/Inc/button.h:
+
+../Core/Inc/fsm_Automatic.h:
+
+../Core/Inc/fsm_Manual.h:
+
+../Core/Inc/software_timer.h:
+
+../Core/Inc/fsm_setting.h:
+
+../Core/Inc/displayTrafficLight.h:
+
+../Core/Inc/display7SEGLED.h:

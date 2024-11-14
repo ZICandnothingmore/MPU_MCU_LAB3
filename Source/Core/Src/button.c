@@ -10,9 +10,9 @@ int TimeOutForKeyPress[NBS_OF_BUTTONS] = {200}; // Mỗi nút có thời gian ch
 
 int button_pressed[NBS_OF_BUTTONS];
 int button_long_pressed[NBS_OF_BUTTONS];
-int button_flag[NBS_OF_BUTTONS];
+int button_flag[NBS_OF_BUTTONS] = {0};
 
-void setButton(int index, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin) {
+void get_input_data(int index, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin) {
 	KeyReg0[index] = KeyReg1[index];
 	KeyReg1[index] = KeyReg2[index];
 	KeyReg2[index] = HAL_GPIO_ReadPin(GPIOx, GPIO_Pin);
@@ -23,9 +23,9 @@ void setButton(int index, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin) {
 //	button_flag[index] = 0;
 //}
 //
-//uint16_t get_Button_flag(int index) {
-//	return button_flag[index];
-//}
+uint16_t get_Button_flag(int index) {
+	return button_flag[index];
+}
 
 uint16_t isButtonPressed(int index) {
 	if (button_flag[index] == 1) {
@@ -50,7 +50,9 @@ int isButtonLongPressed(int index) {
 //}
 
 void getInputKey() {
-	setButton(0, BUTTON_1_GPIO_Port, BUTTON_1_Pin);
+	get_input_data(0, BUTTON_1_GPIO_Port, BUTTON_1_Pin);
+	get_input_data(1, BUTTON_2_GPIO_Port, BUTTON_2_Pin);
+	get_input_data(2, BUTTON_3_GPIO_Port, BUTTON_3_Pin);
 
 	for (int index = 0; index < NBS_OF_BUTTONS; index++) {
 		if ((KeyReg1[index] == KeyReg0[index])

@@ -9,9 +9,8 @@
 #define INC_DISPLAYTRAFFICLIGHT_H_
 
 #include "main.h"
+#include "Global.h"
 #include "display7SEGLED.h"
-
-extern int counter, LED_1, LED_2;
 
 void display_LED();
 void button_mode();
