@@ -44,9 +44,11 @@
 
 #define MAX_7SEG		4
 
+#define ALL_LED (RED_1_Pin | GREEN_1_Pin | YELLOW_1_Pin | RED_2_Pin | GREEN_2_Pin | YELLOW_2_Pin)
+
 extern int status;
 extern int counter;
-extern int led_index;
+extern int index_led;
 extern int buffer_7seg[MAX_7SEG];
 
 extern int STATUS_7SEG;

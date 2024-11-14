@@ -33,17 +33,17 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  14 .debug_aranges 00000a38  00000000  00000000  0002b398  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_macro  00017094  00000000  00000000  0002bdd0  2**0
+ 15 .debug_macro  0001709a  00000000  00000000  0002bdd0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_line   0000bfcd  00000000  00000000  00042e64  2**0
+ 16 .debug_line   0000bfcd  00000000  00000000  00042e6a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_str    000827d5  00000000  00000000  0004ee31  2**0
+ 17 .debug_str    0008282f  00000000  00000000  0004ee37  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .comment      00000053  00000000  00000000  000d1606  2**0
+ 18 .comment      00000053  00000000  00000000  000d1666  2**0
                   CONTENTS, READONLY
- 19 .debug_ranges 00000928  00000000  00000000  000d1660  2**3
+ 19 .debug_ranges 00000928  00000000  00000000  000d16c0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_frame  00002830  00000000  00000000  000d1f88  2**2
+ 20 .debug_frame  00002830  00000000  00000000  000d1fe8  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1081,11 +1081,10 @@ void fsm_automatic_init() {
  8000896:	af00      	add	r7, sp, #0
 	HAL_GPIO_WritePin(GPIOA,
  8000898:	2201      	movs	r2, #1
- 800089a:	21fe      	movs	r1, #254	; 0xfe
+ 800089a:	21fc      	movs	r1, #252	; 0xfc
  800089c:	480c      	ldr	r0, [pc, #48]	; (80008d0 <fsm_automatic_init+0x3c>)
  800089e:	f000 ffbe 	bl	800181e <HAL_GPIO_WritePin>
-			RED_LED_Init_Pin | RED_1_Pin | YELLOW_1_Pin | GREEN_1_Pin
-					| RED_2_Pin | YELLOW_2_Pin | GREEN_2_Pin, LED_OFF);
+			ALL_LED, LED_OFF);
 
 	STATUS_MODE = MODE1;
  80008a2:	4b0c      	ldr	r3, [pc, #48]	; (80008d4 <fsm_automatic_init+0x40>)

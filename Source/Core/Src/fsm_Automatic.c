@@ -13,8 +13,7 @@ int STATUS_LED_2 = INIT;
 
 void fsm_automatic_init() {
 	HAL_GPIO_WritePin(GPIOA,
-			RED_LED_Init_Pin | RED_1_Pin | YELLOW_1_Pin | GREEN_1_Pin
-					| RED_2_Pin | YELLOW_2_Pin | GREEN_2_Pin, LED_OFF);
+			ALL_LED, LED_OFF);
 
 	STATUS_MODE = MODE1;
 	STATUS_7SEG = LED7SEG1;
