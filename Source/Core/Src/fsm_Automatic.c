@@ -7,22 +7,6 @@
 
 #include "fsm_Automatic.h"
 
-int index_led = -1;		// 7seg lỡ 1 nhịp, trông khớp với đèn giao thông hơn
-int STATUS_LED_1 = INIT;
-int STATUS_LED_2 = INIT;
-
-void fsm_automatic_init() {
-	HAL_GPIO_WritePin(GPIOA,
-			ALL_LED, LED_OFF);
-
-	STATUS_MODE = MODE1;
-//	STATUS_7SEG = LED7SEG1;
-
-	setTimer(0, 1010); 	//for LED_1
-	setTimer(1, 230);	//for 4_7SEG
-	setTimer(2, 1010);	//for LED_2
-}
-
 void fsm_automatic_run() {
 	if (STATUS_MODE != MODE1)
 		return;
@@ -32,6 +16,7 @@ void fsm_automatic_run() {
 		TimeRed = 5;
 		TimeYellow = 2;
 		TimeGreen = 3;
+		return;
 	}
 
 	switch (STATUS_LED_1) {
@@ -40,6 +25,9 @@ void fsm_automatic_run() {
 		//initial
 		STATUS_LED_1 = AUTO_RED_1;
 		TimeForLed1 = TimeRed;
+//		setTimer(0, 1010); 	//for LED_1
+//		setTimer(1, 239);	//for 4_7SEG
+//		setTimer(2, 1010);	//for LED_2
 		break;
 	case AUTO_RED_1:
 		//TODO
@@ -63,11 +51,12 @@ void fsm_automatic_run() {
 		if (isTimerExpired(0)) {
 			setTimer(0, 1000);
 			TimeForLed1--;
-			if (TimeForLed1 <= 0) {
-				STATUS_LED_1 = AUTO_YELLOW_1;
-				TimeForLed1 = TimeYellow;
-			}
 		}
+		if (TimeForLed1 <= 0) {
+			STATUS_LED_1 = AUTO_YELLOW_1;
+			TimeForLed1 = TimeYellow;
+		}
+
 		break;
 	case AUTO_YELLOW_1:
 		//TODO
@@ -77,10 +66,10 @@ void fsm_automatic_run() {
 		if (isTimerExpired(0)) {
 			setTimer(0, 1000);
 			TimeForLed1--;
-			if (TimeForLed1 <= 0) {
-				STATUS_LED_1 = AUTO_RED_1;
-				TimeForLed1 = TimeRed;
-			}
+		}
+		if (TimeForLed1 <= 0) {
+			STATUS_LED_1 = AUTO_RED_1;
+			TimeForLed1 = TimeRed;
 		}
 		break;
 	default:
@@ -102,10 +91,10 @@ void fsm_automatic_run() {
 		if (isTimerExpired(2)) {
 			setTimer(2, 1000);
 			TimeForLed2--;
-			if (TimeForLed2 <= 0) {
-				STATUS_LED_2 = AUTO_GREEN_2;
-				TimeForLed2 = TimeGreen;
-			}
+		}
+		if (TimeForLed2 <= 0) {
+			STATUS_LED_2 = AUTO_GREEN_2;
+			TimeForLed2 = TimeGreen;
 		}
 		break;
 	case AUTO_GREEN_2:
@@ -116,10 +105,10 @@ void fsm_automatic_run() {
 		if (isTimerExpired(2)) {
 			setTimer(2, 1000);
 			TimeForLed2--;
-			if (TimeForLed2 <= 0) {
-				STATUS_LED_2 = AUTO_YELLOW_2;
-				TimeForLed2 = TimeYellow;
-			}
+		}
+		if (TimeForLed2 <= 0) {
+			STATUS_LED_2 = AUTO_YELLOW_2;
+			TimeForLed2 = TimeYellow;
 		}
 		break;
 	case AUTO_YELLOW_2:
@@ -130,10 +119,10 @@ void fsm_automatic_run() {
 		if (isTimerExpired(2)) {
 			setTimer(2, 1000);
 			TimeForLed2--;
-			if (TimeForLed2 <= 0) {
-				STATUS_LED_2 = AUTO_RED_2;
-				TimeForLed2 = TimeRed;
-			}
+		}
+		if (TimeForLed2 <= 0) {
+			STATUS_LED_2 = AUTO_RED_2;
+			TimeForLed2 = TimeRed;
 		}
 		break;
 	default:

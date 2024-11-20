@@ -23,13 +23,9 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 //#include "fsm_Automatic.h"
-//#include "fsm_Global.h"
-//#include "fsm_Manual.h"
 #include "software_timer.h"
-//#include "input_processing.h"
 #include "button.h"
 #include "Global.h"
-//#include "fsm_setting.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -112,11 +108,16 @@ int main(void)
 			 EN0_Pin | EN1_Pin
 					| EN2_Pin | EN3_Pin, GPIO_PIN_SET);
 //	setTimer(5, 1000); //for test module
-	fsm_automatic_init();
+	//fsm_automatic_init();
 //	fsm_manual_init();
-//	setTimer(3, 523); 			//blinking led
-//	setTimer(4, 237);			//modified time
-//	HAL_GPIO_WritePin(GPIOA, ALL_LED, LED_OFF);
+
+//	setTimer(1, 239);	//for 4_7SEG
+//	setTimer(2, 1010);	//for LED_2
+//	int TimeForLed1 = 2;
+//	setTimer(3, 523); 	//blinking led
+//	setTimer(4, 257);	//modified time
+	HAL_GPIO_WritePin(GPIOA, ALL_LED, LED_OFF);
+	setTimer(0, 1000); 	//for LED_1
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -137,16 +138,23 @@ int main(void)
 //			HAL_GPIO_TogglePin(GPIOA, RED_2_Pin);
 //		}
 
-		fsm_setting_run();
-		fsm_automatic_run();
-
-		fsm_manual_run();
+//		fsm_setting_run();
+//		fsm_automatic_run();
+//		fsm_manual_run();
 
 //		if (isTimerExpired(5)){
 //			HAL_GPIO_TogglePin(GPIOA, RED_1_Pin);
 //			setTimer(5, 1000);
 //		}
 //		test_module_MANRED();
+
+		if (isTimerExpired(0)) {
+			setTimer(0, 1000);
+//			TimeForLed1--;
+//			if (TimeForLed1 <= 0) {
+				HAL_GPIO_TogglePin(GPIOA, RED_1_Pin);
+//			}
+		}
 
 	}
   /* USER CODE END 3 */

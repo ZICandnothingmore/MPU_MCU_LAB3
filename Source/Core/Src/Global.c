@@ -25,4 +25,8 @@ int counter = 0;
 int status_led = 0;
 int modeLED = INIT;
 
+int index_led = -1;
+int STATUS_LED_1 = INIT;
+int STATUS_LED_2 = INIT;
+
 int value = 0;

@@ -10,7 +10,15 @@
 void fsm_setting_run() {
 	switch (STATUS_MODE) {
 	case INIT:
+		HAL_GPIO_WritePin(GPIOA, ALL_LED, LED_OFF);
 		STATUS_MODE = MODE1;
+		index_led = -1;
+		STATUS_LED_1 = INIT;
+		STATUS_LED_2 = INIT;
+//		setTimer(0, 1010); 	//for LED_1
+//		setTimer(1, 230);	//for 4_7SEG
+//		setTimer(2, 1010);	//for LED_2
+//		HAL_GPIO_TogglePin(GPIOA, RED_1_Pin);
 		break;
 	case MODE1:
 		if (isButtonPressed(0)) {
@@ -22,6 +30,7 @@ void fsm_setting_run() {
 		}
 		break;
 	case MODE2:
+		//Modify the RED time duration
 		if (counter == 1) {
 			HAL_GPIO_WritePin(GPIOA, ALL_LED, LED_OFF);
 			setTimer(3, 523); 			//blinking led
@@ -33,12 +42,12 @@ void fsm_setting_run() {
 			value = TimeYellow;
 			counter = 1;
 			STATUS_BLINKY = INIT;
-		}
-		else if (isButtonPressed(2)) {
+		} else if (isButtonPressed(2)) {
 			TimeRed = value;
 		}
 		break;
 	case MODE3:
+		//Modify the YELLOW time duration
 		if (counter == 1) {
 			HAL_GPIO_WritePin(GPIOA, ALL_LED, LED_OFF);
 			counter = 0;
@@ -53,17 +62,13 @@ void fsm_setting_run() {
 		}
 		break;
 	case MODE4:
+		//Modify the GREEN time duration
 		if (counter == 1) {
 			HAL_GPIO_WritePin(GPIOA, ALL_LED, LED_OFF);
 			counter = 0;
 		}
 		if (isButtonPressed(0)) {
-			HAL_GPIO_WritePin(GPIOA,
-						ALL_LED, LED_OFF);
-			STATUS_MODE = MODE1;
-			index_led = -1;
-			STATUS_LED_1 = INIT;
-			STATUS_LED_2 = INIT;
+			STATUS_MODE = INIT;
 		} else if (isButtonPressed(2)) {
 			TimeGreen = value;
 		}

@@ -55,7 +55,7 @@ void fsm_manual_run(){
 		break;
 	case MODE3:
 			if (isTimerExpired(3)){
-				HAL_GPIO_TogglePin(GPIOA, GREEN_1_Pin|GREEN_2_Pin);
+				HAL_GPIO_TogglePin(GPIOA, YELLOW_1_Pin|YELLOW_2_Pin);
 				setTimer(3, 500);
 			}
 			if (isButtonPressed(1)){
@@ -64,7 +64,7 @@ void fsm_manual_run(){
 			break;
 	case MODE4:
 			if (isTimerExpired(3)){
-				HAL_GPIO_TogglePin(GPIOA, YELLOW_1_Pin|YELLOW_2_Pin);
+				HAL_GPIO_TogglePin(GPIOA, GREEN_1_Pin|GREEN_2_Pin);
 				setTimer(3, 500);
 			}
 			if (isButtonPressed(1)){
