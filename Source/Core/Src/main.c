@@ -101,18 +101,18 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 	HAL_TIM_Base_Start_IT(&htim2);
-	HAL_GPIO_WritePin(GPIOB,
-			a_Pin |b_Pin | c_Pin | dd_Pin | ee_Pin | ff_Pin | gg_Pin | d_Pin | e_Pin
-					| f_Pin | g_Pin | aa_Pin | bb_Pin | cc_Pin, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOA,
-			 EN0_Pin | EN1_Pin
-					| EN2_Pin | EN3_Pin, GPIO_PIN_SET);
+//	HAL_GPIO_WritePin(GPIOB,
+//			a_Pin |b_Pin | c_Pin | dd_Pin | ee_Pin | ff_Pin | gg_Pin | d_Pin | e_Pin
+//					| f_Pin | g_Pin | aa_Pin | bb_Pin | cc_Pin, GPIO_PIN_SET);
+//	HAL_GPIO_WritePin(GPIOA,
+//			 EN0_Pin | EN1_Pin
+//					| EN2_Pin | EN3_Pin, GPIO_PIN_SET);
 //	setTimer(5, 1000); //for test module
 	//fsm_automatic_init();
 //	fsm_manual_init();
 
-//	setTimer(1, 239);	//for 4_7SEG
-//	setTimer(2, 1010);	//for LED_2
+	setTimer(1, 239);	//for 4_7SEG
+	setTimer(2, 1010);	//for LED_2
 //	int TimeForLed1 = 2;
 //	setTimer(3, 523); 	//blinking led
 //	setTimer(4, 257);	//modified time
@@ -138,9 +138,9 @@ int main(void)
 //			HAL_GPIO_TogglePin(GPIOA, RED_2_Pin);
 //		}
 
-//		fsm_setting_run();
-//		fsm_automatic_run();
-//		fsm_manual_run();
+		fsm_setting_run();
+		fsm_automatic_run();
+		fsm_manual_run();
 
 //		if (isTimerExpired(5)){
 //			HAL_GPIO_TogglePin(GPIOA, RED_1_Pin);
@@ -148,13 +148,13 @@ int main(void)
 //		}
 //		test_module_MANRED();
 
-		if (isTimerExpired(0)) {
-			setTimer(0, 1000);
-//			TimeForLed1--;
-//			if (TimeForLed1 <= 0) {
-				HAL_GPIO_TogglePin(GPIOA, RED_1_Pin);
-//			}
-		}
+//		if (isTimerExpired(0)) {
+////			TimeForLed1--;
+////			if (TimeForLed1 <= 0) {
+//				HAL_GPIO_TogglePin(GPIOA, RED_1_Pin);
+//				setTimer(0, 1000);
+////			}
+//		}
 
 	}
   /* USER CODE END 3 */
